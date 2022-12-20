@@ -41,3 +41,79 @@
 <p>Create an ERD to represent this database. Specifically, you are being asked show the relationships between the tables above with the appropriate cardinality in your ERD.</p>
 <h2 class="code-line" data-line-start="29" data-line-end="30"><a id="3_What_to_Submit_29"></a>3. What to Submit</h2>
 <p class="has-line-data" data-line-start="31" data-line-end="32">Submit an image or a zip file, if you created more than one ERD, to Canvas. <br><strong>NOTE: Make sure that you submit an image in .jpg, .jpeg, or .png format. Do not submit the draw.io file.</strong></p></div></span></div></div>
+
+
+
+# Challenge: MySQLMulti-Table Queries
+
+<div class="user_content enhanced" data-test-id="assignments-2-assignment-toggle-details-text"><div id="preview1" class="g-b g-b--t1of2 split split-preview" style="height: 729px;">
+<div id="preview" class="preview-html">
+<h1 class="code-line" data-line-start="0" data-line-end="1">Multi-table Queries in SQL</h1>
+<h2 class="code-line" data-line-start="2" data-line-end="3"><a id="Goals_2"></a>Goals</h2>
+<ul>
+<li class="has-line-data" data-line-start="4" data-line-end="5">To gain experience and develop skill constructing queries that reference more than one database table.</li>
+<li class="has-line-data" data-line-start="5" data-line-end="6">To gain experience and develop a deeper understanding of relational database systems.</li>
+<li class="has-line-data" data-line-start="6" data-line-end="8">To gain experience and further develop skill working on the command line in Docker and with the MySQL server.</li>
+</ul>
+<h2 class="code-line" data-line-start="8" data-line-end="9"><a id="Description_8"></a>Description</h2>
+<p class="has-line-data" data-line-start="10" data-line-end="11">In this challenge you will continue working with the module2 database you were given in module 2. Your queries in this challenge will be a bit more complex, though. In module 2 each queriey you wrote only referenced one table at a time. MySQL, though, is a relational database system which means that database tables are "<strong>related</strong>" to other tables in the database. We can exploit these relations to develop more robust queries and answer more complex questions. This will be fun!</p>
+<h2 class="code-line" data-line-start="12" data-line-end="13"><a id="Purpose_12"></a>Purpose</h2>
+<p class="has-line-data" data-line-start="14" data-line-end="15">This challenge will provide you with experience developing multi-table queries in MySQL.</p>
+<h2 class="code-line" data-line-start="16" data-line-end="17"><a id="Project_Tasks_16"></a>Project Tasks</h2>
+<ol>
+<li class="has-line-data" data-line-start="18" data-line-end="19">Log into your mysql-container in your Docker development environment.</li>
+<li class="has-line-data" data-line-start="19" data-line-end="20">Log into the MySQL server.</li>
+<li class="has-line-data" data-line-start="20" data-line-end="21">View example queries.</li>
+<li class="has-line-data" data-line-start="21" data-line-end="22">Construct queries to answer the questions about the database and save queries to an sql file.</li>
+<li class="has-line-data" data-line-start="22" data-line-end="24">Submit sql file to Canvas.</li>
+</ol>
+<h2 class="code-line" data-line-start="24" data-line-end="25"><a id="1_Log_into_mysqlcontainer_in_Docker_24"></a>1. Log into mysql-container in Docker</h2>
+<p class="has-line-data" data-line-start="26" data-line-end="27">Logging into the mysql-container in Docker is the same as module 2. Open a terminal (Mac) or command prompt (PC) and type the following command.</p>
+<ul>
+<li class="has-line-data" data-line-start="28" data-line-end="30"><code>docker exec -it mysql-container bash</code></li>
+</ul>
+<h2 class="code-line" data-line-start="30" data-line-end="31"><a id="2_Log_into_MySQL_Server_30"></a>2. Log into MySQL Server</h2>
+<p class="has-line-data" data-line-start="32" data-line-end="33">Once you’re logged into your mysql-container you can run the following commands to log into the mysql server and select the module2 database.</p>
+<ul>
+<li class="has-line-data" data-line-start="34" data-line-end="35"><code>mysql -u root -p</code> password: root</li>
+<li class="has-line-data" data-line-start="35" data-line-end="37"><code>use module2</code></li>
+</ul>
+<h2 class="code-line" data-line-start="37" data-line-end="38"><a id="3_Example_Queries_37"></a>3. Example Queries</h2>
+<p class="has-line-data" data-line-start="39" data-line-end="40">You should run the following queries to see the results.</p>
+<p class="has-line-data" data-line-start="41" data-line-end="42">Create a query using table aliases that displays the agent name, customer name, and order number of the order they placed.</p>
+<pre><code class="has-line-data" data-line-start="44" data-line-end="48"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> a.AGENT_NAME, <span class="hljs-keyword">c</span>.CUST_NAME, o.ORD_NUM
+<span class="hljs-keyword">FROM</span> agents a, customer <span class="hljs-keyword">c</span>, orders o
+<span class="hljs-keyword">WHERE</span> a.AGENT_CODE = o.AGENT_CODE <span class="hljs-keyword">AND</span> <span class="hljs-keyword">c</span>.CUST_CODE = o.CUST_CODE;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="49" data-line-end="50">Create a query that does not use table aliases that displays the agent name, customer name, and order number of the order they placed.</p>
+<pre><code class="has-line-data" data-line-start="52" data-line-end="56"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> agents.AGENT_NAME, customer.CUST_NAME, orders.ORD_NUM
+<span class="hljs-keyword">FROM</span> agents, customer, orders
+<span class="hljs-keyword">WHERE</span> agents.AGENT_CODE = orders.AGENT_CODE <span class="hljs-keyword">AND</span> customer.CUST_CODE = orders.CUST_CODE;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="57" data-line-end="58">Displays the agent name, customer name, and order number of the order they placed for customer C00020</p>
+<pre><code class="has-line-data" data-line-start="60" data-line-end="64"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> a.AGENT_NAME, <span class="hljs-keyword">c</span>.CUST_NAME, o.ORD_NUM
+<span class="hljs-keyword">FROM</span> agents a, customer <span class="hljs-keyword">c</span>, orders o
+<span class="hljs-keyword">WHERE</span> a.AGENT_CODE = o.AGENT_CODE <span class="hljs-keyword">AND</span> <span class="hljs-keyword">c</span>.CUST_CODE = o.CUST_CODE <span class="hljs-keyword">AND</span> <span class="hljs-keyword">c</span>.CUST_CODE = <span class="hljs-string">"C00020"</span>;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="65" data-line-end="66">Display the agent names and all of their customers information</p>
+<pre><code class="has-line-data" data-line-start="68" data-line-end="72"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> a.AGENT_NAME, <span class="hljs-keyword">c</span>.*
+<span class="hljs-keyword">FROM</span> agents a, customer <span class="hljs-keyword">c</span>
+<span class="hljs-keyword">WHERE</span> a.AGENT_CODE = <span class="hljs-keyword">c</span>.AGENT_CODE;</span>
+</code></pre>
+<p class="has-line-data" data-line-start="73" data-line-end="74"><strong>The asterisk in c.* in the select tells mysql to select all the columns from the customer table. That saves time from having to list all columns names individually.</strong></p>
+<h2 class="code-line" data-line-start="75" data-line-end="76"><a id="4_Construct_Queries_75"></a>4. Construct Queries</h2>
+<p class="has-line-data" data-line-start="77" data-line-end="78">You should write queries for the following questions. To ensure that your queries work you should execute them individually in your terminal while logged into your database. Save all of your queries in a file named mod3-queries.sql. An sql file is just a text file with a “.sql” extension so it can be created in any text editor.</p>
+<ol>
+<li class="has-line-data" data-line-start="79" data-line-end="80">Display the customer name and all of their agent’s information.</li>
+<li class="has-line-data" data-line-start="80" data-line-end="81">For each order, display order number, order date, customer name and agent name.</li>
+<li class="has-line-data" data-line-start="81" data-line-end="82">Display agent name, customer name, order date, and order amount for customers from Canada.</li>
+<li class="has-line-data" data-line-start="82" data-line-end="83">Display customer name, order number, and order amount for customers in New York city.</li>
+<li class="has-line-data" data-line-start="83" data-line-end="84">Display agent name, customer name, order number and order amount for orders of more han $1,500.</li>
+<li class="has-line-data" data-line-start="84" data-line-end="85">Display all agent and orders information.</li>
+<li class="has-line-data" data-line-start="85" data-line-end="86">Display customer name, customer code, outstanding amount, and agent name for customers with outstanding amounts greater than or equal to $6,000.</li>
+<li class="has-line-data" data-line-start="86" data-line-end="87">Display customer name, order number order amount, and advance amount if order amount is greater than or equal to $2,500 or advance amount is less than $300.</li>
+<li class="has-line-data" data-line-start="87" data-line-end="88">Display agent name, agent working area, customer name, customer working area for customers and agents who have the same working area.</li>
+<li class="has-line-data" data-line-start="88" data-line-end="89">Display customer name, agent name, and order number where order amount is less than $1,000 or opening amount is greater than $8000.</li>
+</ol>
+</div>
+</div></div>
