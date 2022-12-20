@@ -1,0 +1,91 @@
+/***************************************************************************** 
+ * Author:      Madison Hassler
+ * Pawprint:    mehfmd
+ * Course:      INFOTC 3380
+ * Semester:    Fall 2022
+ * Date:        October 28, 2022
+ * Module:      10
+ * Challenge:   Joins In MySQL
+ ****************************************************************************/
+
+
+
+ 2A
+
+-- 1. Display the customer name, customer number, along with their sales rep's number, first name, and last name.
+JOIN
+    ~ Different:
+    ~ Number of Results Returned: 100 
+    ~ Columns with NULL: N/A
+LEFT JOIN
+    ~ Different: Apppears to not return sales rep name in a grouped form and only returns their name once. NULLS aparent for some but not all sales reps number and names
+    ~ Number of Results Returned: 122
+    ~ Columns with NULL: salesRepEmployeeNumber | firstName | lastName 
+RIGHT JOIN
+    ~ Different: Results most similar to JOIN with groupings of sales rep names but there is nulls in each columns
+    ~ Number of Results Returned: 108
+    ~ Columns with NULL:  customerName | customerNumber | salesRepEmployeeNumber | firstName | lastName 
+
+
+
+-- 2. Display each employee's first and last name and their office code, city, and phone.
+JOIN
+    ~ Different: In order by office code
+    ~ Number of Results Returned: 23
+    ~ Columns with NULL: N/A
+LEFT JOIN
+    ~ Different: Same results but ordered randomly
+    ~ Number of Results Returned: 23
+    ~ Columns with NULL: N/A
+RIGHT JOIN
+    ~ Different: Same as others
+    ~ Number of Results Returned: 23
+    ~ Columns with NULL: N/A
+
+
+
+-- 3. Display the customer's name, and number along with the order number order date, product name, quantity, and price for each of the customer's orders.
+JOIN
+    ~ Different: Grouped by customer name
+    ~ Number of Results Returned: 2996
+    ~ Columns with NULL: N/A
+LEFT JOIN
+    ~ Different: grouped by customer name, contains null results, and output more results
+    ~ Number of Results Returned: 3020
+    ~ Columns with NULL: orderNumber | orderDate  | productName  | quantityOrdered | priceEach
+RIGHT JOIN
+    ~ Different: extra row and grouped by product name
+    ~ Number of Results Returned: 2997
+    ~ Columns with NULL: N/A 
+
+
+
+-- 4. Display the customer name and customer number along with the payment date, check number, and amount for each payment
+JOIN
+    ~ Different: grouped by customer name
+    ~ Number of Results Returned: 273
+    ~ Columns with NULL: N/A
+LEFT JOIN
+    ~ Different: returned nulls and more results, grouped by customer name
+    ~ Number of Results Returned: 297
+    ~ Columns with NULL: paymentDate | checkNumber | amount
+RIGHT JOIN
+    ~ Different: same as JOIN
+    ~ Number of Results Returned: 273
+    ~ Columns with NULL: N/A
+
+
+
+-- 5. Display the product line, description, and product name for all products
+JOIN
+    ~ Different:
+    ~ Number of Results Returned: 110
+    ~ Columns with NULL: N/A
+LEFT JOIN
+    ~ Different: same as JOIN
+    ~ Number of Results Returned: 110
+    ~ Columns with NULL: N/A
+RIGHT JOIN
+    ~ Different: same as JOIN 
+    ~ Number of Results Returned: 110
+    ~ Columns with NULL: N/A
